@@ -21,11 +21,15 @@ namespace Zuul
 			Room pub = new Room("in the campus pub");
 			Room lab = new Room("in a computing lab");
 			Room office = new Room("in the computing admin office");
+			Room basement = new Room("In a foggy and smelly basement");
 
 			// initialise room exits
 			outside.AddExit("east", theatre);
 			outside.AddExit("south", lab);
 			outside.AddExit("west", pub);
+			outside.AddExit("down", basement);
+
+			basement.AddExit("up", outside);
 
 			theatre.AddExit("west", outside);
 
@@ -99,12 +103,20 @@ namespace Zuul
 				case "quit":
 					wantToQuit = true;
 					break;
+				case "look":
+					Look();
+					break;
 			}
 
 			return wantToQuit;
 		}
 
 		// implementations of user commands:
+
+		private void Look()
+        {
+			Console.WriteLine(currentRoom.GetLongDescription());
+        }
 
 		/**
 		 * Print out some help information.
