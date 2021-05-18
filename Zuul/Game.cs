@@ -62,6 +62,7 @@ namespace Zuul
 			Console.WriteLine("Thank you for playing.");
 			Console.WriteLine("Press [Enter] to continue.");
 			Console.ReadLine();
+
 		}
 
 		/**
@@ -107,6 +108,9 @@ namespace Zuul
 				case "look":
 					Look();
 					break;
+				case "status":
+					Status();
+					break;
 			}
 
 			return wantToQuit;
@@ -117,6 +121,11 @@ namespace Zuul
 		private void Look()
         {
 			Console.WriteLine(player.currentRoom.GetLongDescription());
+        }
+		private void Status()
+        {
+			Console.WriteLine("[status] This is your status update:");
+			Console.WriteLine("You are loosing blood! You have " + player.GetHealth() + " health left");
         }
 
 		/**
@@ -158,6 +167,8 @@ namespace Zuul
 			{
 				player.currentRoom = nextRoom;
 				Console.WriteLine(player.currentRoom.GetLongDescription());
+				player.Damage(1);
+				player.GetIsAlive();
 			}
 		}
 
