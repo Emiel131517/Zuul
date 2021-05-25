@@ -54,10 +54,25 @@ namespace Zuul
 			// Enter the main command loop.  Here we repeatedly read commands and
 			// execute them until the player wants to quit.
 			bool finished = false;
+			if (player.Health < 1)
+			{
+				finished = true;
+			} 
 			while (!finished)
 			{
-				Command command = parser.GetCommand();
-				finished = ProcessCommand(command);
+				if (player.PlayerIsAlive() == true)
+				{
+					Command command = parser.GetCommand();
+					finished = ProcessCommand(command);
+				}
+				else
+                {
+					Console.WriteLine("Oh no, you bled out!");
+					Console.WriteLine("#####################");
+					Console.WriteLine("      GAME OVER");
+					Console.WriteLine("#####################");
+					finished = true;
+                }
 			}
 			Console.WriteLine("Thank you for playing.");
 			Console.WriteLine("Press [Enter] to continue.");
@@ -125,7 +140,7 @@ namespace Zuul
 		private void Status()
         {
 			Console.WriteLine("[status] This is your status update:");
-			Console.WriteLine("You are loosing blood! You have " + player.GetHealth() + " health left");
+			Console.WriteLine("You are loosing blood! You have " + player.Health + " health left");
         }
 
 		/**
@@ -168,7 +183,6 @@ namespace Zuul
 				player.currentRoom = nextRoom;
 				Console.WriteLine(player.currentRoom.GetLongDescription());
 				player.Damage(1);
-				player.GetIsAlive();
 			}
 		}
 
