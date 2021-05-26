@@ -8,19 +8,19 @@ namespace Zuul
     {
         private int maxWeight;
         private int currentWeight;
-        private List<Item> items;
+        private Dictionary<string, Item> items;
 
         public Inventory(int maxWeight)
         {
             this.maxWeight = maxWeight;
-            this.items = new List<Item>();
+            this.items = new Dictionary<string, Item>();
         }
         public bool Put(Item item)
         {
             if (currentWeight + item.Weight <= maxWeight)
             {
                 Console.WriteLine("You picked up " + item);
-                items.Add(item);
+                items.Add(null, item);
                 return true;
             }
             else
@@ -31,6 +31,10 @@ namespace Zuul
         }
         public Item Get(string itemName)
         {
+            if (items.ContainsKey(itemName))
+            {
+                return items[itemName];
+            }
             return null;
         }
     }
