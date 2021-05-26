@@ -33,7 +33,9 @@ namespace Zuul
         {
             if (items.ContainsKey(itemName))
             {
-                return items[itemName];
+                Item item = items[itemName];
+                items.Remove(itemName);
+                return item;
             }
             return null;
         }
