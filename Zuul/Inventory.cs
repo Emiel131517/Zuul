@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Zuul
 {
-    class Inventory
+    public class Inventory
     {
         private int maxWeight;
         private int currentWeight;
