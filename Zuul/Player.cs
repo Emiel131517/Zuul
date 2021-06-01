@@ -6,6 +6,7 @@ namespace Zuul
 {
     class Player
     {
+
         private Inventory inventory;
         private int health;
         private bool isAlive; 
@@ -50,8 +51,18 @@ namespace Zuul
         }
         public bool TakeFromChest(string itemName)
         {
-            
-            
+            Item item = currentRoom.Chest.Get(itemName);
+            if (item == null)
+            {
+                Console.WriteLine("There is no " + itemName + " in your current room!");
+                return false;
+            }
+            if (inventory.Put(itemName, item))
+            {
+                Console.WriteLine("You picked up " + itemName);
+                return true;
+            }
+            Console.WriteLine("You do not have the space to carry " + itemName + " or you will be encumbered!");
             return false;
         }
     }

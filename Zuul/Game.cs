@@ -24,6 +24,8 @@ namespace Zuul
 			Room office = new Room("in the computing admin office");
 			Room basement = new Room("In a foggy and smelly basement");
 
+			outside.Chest.Put("Hammer", new Item(10, "A heavy hammer"));
+
 			// initialise room exits
 			outside.AddExit("east", theatre);
 			outside.AddExit("south", lab);

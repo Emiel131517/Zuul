@@ -19,13 +19,11 @@ namespace Zuul
         {
             if (currentWeight + item.Weight <= maxWeight)
             {
-                Console.WriteLine("You picked up " + item);
                 items.Add(itemName, item);
                 return true;
             }
             else
             {
-                Console.WriteLine("You can't pick that up or you will be encumbered");
                 return false;
             }
         }
