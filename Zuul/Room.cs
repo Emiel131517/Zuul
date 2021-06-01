@@ -21,6 +21,7 @@ namespace Zuul
 		{
 			description = desc;
 			exits = new Dictionary<string, Room>();
+			chest = new Inventory(100);
 		}
 
 		/**

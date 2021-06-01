@@ -6,7 +6,7 @@ namespace Zuul
 {
     class Player
     {
-
+        private Inventory inventory;
         private int health;
         private bool isAlive; 
 
@@ -22,6 +22,7 @@ namespace Zuul
 
         public Player()
         {
+            inventory = new Inventory(20);
             health = 2;
             currentRoom = null;
         }
@@ -46,6 +47,12 @@ namespace Zuul
                 isAlive = true;
             }
             return isAlive;
+        }
+        public bool TakeFromChest(string itemName)
+        {
+            
+            
+            return false;
         }
     }
 }

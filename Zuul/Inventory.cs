@@ -15,12 +15,12 @@ namespace Zuul
             this.maxWeight = maxWeight;
             this.items = new Dictionary<string, Item>();
         }
-        public bool Put(Item item)
+        public bool Put(string itemName, Item item)
         {
             if (currentWeight + item.Weight <= maxWeight)
             {
                 Console.WriteLine("You picked up " + item);
-                items.Add(null, item);
+                items.Add(itemName, item);
                 return true;
             }
             else
