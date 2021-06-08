@@ -24,7 +24,7 @@ namespace Zuul
 			Room office = new Room("in the computing admin office");
 			Room basement = new Room("In a foggy and smelly basement");
 
-			outside.Chest.Put("Hammer", new Item(10, "A heavy hammer"));
+			outside.Chest.Put("hammer", new Item(10, "A heavy hammer"));
 
 			// initialise room exits
 			outside.AddExit("east", theatre);
@@ -128,6 +128,12 @@ namespace Zuul
 				case "status":
 					Status();
 					break;
+				case "take":
+					Take(command);
+					break;
+				case "drop":
+					Drop(command);
+					break;
 			}
 
 			return wantToQuit;
@@ -143,6 +149,20 @@ namespace Zuul
         {
 			Console.WriteLine("[status] This is your status update:");
 			Console.WriteLine("You are loosing blood! You have " + player.Health + " health left");
+        }
+		private void Take(Command command)
+        {
+			if (command.HasSecondWord())
+            {
+				player.TakeFromChest(command.GetSecondWord());
+			}
+        }
+		private void Drop(Command command)
+        {
+			if (command.HasSecondWord())
+            {
+				player.DropToChest(command.GetSecondWord());
+			}
         }
 
 		/**

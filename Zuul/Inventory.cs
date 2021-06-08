@@ -19,6 +19,7 @@ namespace Zuul
         {
             if (currentWeight + item.Weight <= maxWeight)
             {
+                currentWeight = currentWeight + item.Weight;
                 items.Add(itemName, item);
                 return true;
             }

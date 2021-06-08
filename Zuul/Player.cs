@@ -68,13 +68,15 @@ namespace Zuul
         }
         public bool DropToChest(string itemName)
         {
-            Item item = currentRoom.Chest.Get(itemName);
-            if (currentRoom.Chest.Put(itemName, item))
+            Item item = inventory.Get(itemName);
+            if (item == null) 
             {
-                Console.WriteLine("You dropped your item!");
-                return true;
+                
+                return false;
             }
-            return false;
+            Console.WriteLine("You dropped " + itemName);
+            currentRoom.Chest.Put(itemName, item);
+            return true;
         }
     }
 }
