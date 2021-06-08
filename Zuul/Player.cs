@@ -24,7 +24,7 @@ namespace Zuul
         public Player()
         {
             inventory = new Inventory(20);
-            health = 2;
+            health = 10;
             currentRoom = null;
         }
         public int Damage(int amount)
@@ -63,6 +63,17 @@ namespace Zuul
                 return true;
             }
             Console.WriteLine("You do not have the space to carry " + itemName + " or you will be encumbered!");
+            currentRoom.Chest.Put(itemName, item);
+            return false;
+        }
+        public bool DropToChest(string itemName)
+        {
+            Item item = currentRoom.Chest.Get(itemName);
+            if (currentRoom.Chest.Put(itemName, item))
+            {
+                Console.WriteLine("You dropped your item!");
+                return true;
+            }
             return false;
         }
     }
