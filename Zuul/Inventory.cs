@@ -7,7 +7,6 @@ namespace Zuul
     public class Inventory
     {
         private int maxWeight;
-        private int currentWeight;
         private Dictionary<string, Item> items;
 
         public Inventory(int maxWeight)
@@ -15,11 +14,21 @@ namespace Zuul
             this.maxWeight = maxWeight;
             this.items = new Dictionary<string, Item>();
         }
+
+        public int CurrentWeight()
+        {
+            int totalWeight = 0;
+            foreach (KeyValuePair<string, Item> entry in items)
+            {
+                totalWeight += entry.Value.Weight;
+            }
+            return totalWeight;
+        }
+
         public bool Put(string itemName, Item item)
         {
-            if (currentWeight + item.Weight <= maxWeight)
+            if (CurrentWeight() + item.Weight <= maxWeight)
             {
-                currentWeight = currentWeight + item.Weight;
                 items.Add(itemName, item);
                 return true;
             }

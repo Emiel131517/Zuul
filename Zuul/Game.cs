@@ -126,7 +126,7 @@ namespace Zuul
 					Look();
 					break;
 				case "status":
-					Status();
+					player.Status();
 					break;
 				case "take":
 					Take(command);
@@ -144,11 +144,6 @@ namespace Zuul
 		private void Look()
         {
 			Console.WriteLine(player.currentRoom.GetLongDescription());
-        }
-		private void Status()
-        {
-			Console.WriteLine("[status] This is your status update:");
-			Console.WriteLine("You are loosing blood! You have " + player.Health + " health left");
         }
 		private void Take(Command command)
         {

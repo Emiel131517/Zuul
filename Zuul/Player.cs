@@ -9,7 +9,7 @@ namespace Zuul
 
         private Inventory inventory;
         private int health;
-        private bool isAlive; 
+        private bool isAlive;
 
         public Room currentRoom { get; set; }
         public int Health
@@ -26,6 +26,12 @@ namespace Zuul
             inventory = new Inventory(20);
             health = 10;
             currentRoom = null;
+        }
+        public void Status()
+        {
+            Console.WriteLine("[status] This is your status update:");
+            Console.WriteLine("You are loosing blood! You have " + Health + " health left");
+            Console.WriteLine("Your weight is: " + inventory.CurrentWeight());
         }
         public int Damage(int amount)
         {
