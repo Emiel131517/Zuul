@@ -6,7 +6,7 @@ namespace Zuul
 {
     class Player
     {
-
+        private bool ableToUse;
         private Inventory inventory;
         private int health;
         private bool isAlive;
@@ -45,11 +45,9 @@ namespace Zuul
         }
         public bool PlayerIsAlive()
         {
-            if (health < 1)
-            {
-                isAlive = false;
-            }
-            else
+
+            isAlive = false;
+            if (health > 1)
             {
                 isAlive = true;
             }
@@ -83,6 +81,19 @@ namespace Zuul
             Console.WriteLine("You dropped " + itemName);
             currentRoom.Chest.Put(itemName, item);
             return true;
+        }
+        public string Use(string itemName)
+        {
+            if (ableToUse == false)
+            {
+                Console.WriteLine("You cann't use " + itemName + " here!");
+                return itemName;
+            } 
+            else
+            {
+                inventory.Get(itemName);
+                return itemName;
+            }
         }
     }
 }
