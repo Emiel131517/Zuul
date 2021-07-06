@@ -9,6 +9,7 @@ namespace Zuul
         private Inventory inventory;
         private int health;
         private bool isAlive;
+        private Random rnd = new Random();
 
         public Room currentRoom { get; set; }
         public int Health
@@ -92,7 +93,7 @@ namespace Zuul
             }
             if (itemName == "medkit")
             {
-                this.Heal(5);
+                this.Heal(7);
                 Console.WriteLine("You used a medkit!");
                 this.inventory.Get("medkit");
             }
@@ -103,6 +104,28 @@ namespace Zuul
                 next.Locked = false;
                 Console.WriteLine("You rammed open the door");
                 this.inventory.Get("hammer");
+            }
+           if (itemName == "harmonica")
+            {
+                this.Heal(3);
+                Console.WriteLine("You play a nice song and you healed a bit, but the harmonica broke");
+                this.inventory.Get("harmonica");
+            }
+           if (itemName == "beer")
+            {
+                int beerchance = rnd.Next(0, 2);
+                if (beerchance == 0)
+                {
+                    this.Heal(5);
+                    Console.WriteLine("You feel much better now and you healed alot");
+                    this.inventory.Get("beer");
+                }
+                if (beerchance == 1)
+                {
+                    this.Damage(2);
+                    Console.WriteLine("You got drunk and hit your toe, you lost some health");
+                    this.inventory.Get("beer");
+                }
             }
             return "";
         }

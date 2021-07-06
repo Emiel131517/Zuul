@@ -63,6 +63,9 @@ namespace Zuul
 			// Items
 			janitorsroom.Chest.Put("hammer", new Item(15, "A heavy hammer"));
 			medicbay.Chest.Put("medkit", new Item(5, "A medical health kit"));
+			office.Chest.Put("businesscard", new Item(1, "A boring looking and useless business card"));
+			theatre.Chest.Put("harmonica", new Item(2, "A nice sounding harmonica"));
+			pub.Chest.Put("beer", new Item(1, "A nice cold glass of beer"));
 		}
 
 		/**
