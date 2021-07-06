@@ -6,7 +6,6 @@ namespace Zuul
 {
     class Player
     {
-        private bool ableToUse;
         private Inventory inventory;
         private int health;
         private bool isAlive;
@@ -47,6 +46,7 @@ namespace Zuul
         {
 
             isAlive = false;
+
             if (health > 1)
             {
                 isAlive = true;
@@ -82,18 +82,28 @@ namespace Zuul
             currentRoom.Chest.Put(itemName, item);
             return true;
         }
-        public string Use(string itemName)
+        public string Use(Command command)
         {
-            if (ableToUse == false)
+            string itemName = command.GetSecondWord();
+            Item item = inventory.Get(itemName);
+            if (item == null)
             {
-                Console.WriteLine("You cann't use " + itemName + " here!");
-                return itemName;
-            } 
-            else
-            {
-                inventory.Get(itemName);
-                return itemName;
+                return "You don't have " + itemName; 
             }
+            if (itemName == "medkit")
+            {
+                this.Heal(5);
+                Console.WriteLine("You used a medkit!");
+                this.inventory.Get("medkit");
+            }
+           if (itemName == "hammer")
+            {
+                string exitString = command.GetThirdWord();
+                Room next = currentRoom.GetExit(exitString);
+                Console.WriteLine("You opend a door");
+                this.inventory.Get("hammer");
+            }
+            return "";
         }
     }
 }

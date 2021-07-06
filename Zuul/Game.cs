@@ -21,10 +21,11 @@ namespace Zuul
 			Room theatre = new Room("in a lecture theatre");
 			Room pub = new Room("in the campus pub");
 			Room lab = new Room("in a computing lab");
+			Room medicbay = new Room("In a medical bay");
 			Room office = new Room("in the computing admin office");
 			Room basement = new Room("In a foggy and smelly basement");
-
-			outside.Chest.Put("hammer", new Item(10, "A heavy hammer"));
+			Room cave = new Room("A dark cave unknown cave");
+			Room freedom = new Room("You made it to freedan and you are far away from the university");
 
 			// initialise room exits
 			outside.AddExit("east", theatre);
@@ -33,6 +34,7 @@ namespace Zuul
 			outside.AddExit("down", basement);
 
 			basement.AddExit("up", outside);
+			basement.AddExit("west", cave);
 
 			theatre.AddExit("west", outside);
 
@@ -40,10 +42,20 @@ namespace Zuul
 
 			lab.AddExit("north", outside);
 			lab.AddExit("east", office);
+			lab.AddExit("south", medicbay);
+
+			medicbay.AddExit("north", lab);
 
 			office.AddExit("west", lab);
 
+			cave.AddExit("north", freedom);
+			cave.IsLocked();
+
 			player.currentRoom = outside;  // start game outside
+
+			// Items
+			outside.Chest.Put("hammer", new Item(10, "A heavy hammer"));
+			medicbay.Chest.Put("medkit", new Item(5, "A medical health kit"));
 		}
 
 		/**
@@ -134,6 +146,9 @@ namespace Zuul
 				case "drop":
 					Drop(command);
 					break;
+				case "use":
+					player.Use(command);
+					break;
 			}
 
 			return wantToQuit;
@@ -193,10 +208,15 @@ namespace Zuul
 
 			if (nextRoom == null)
 			{
-				Console.WriteLine("There is no door to "+direction+"!");
+				Console.WriteLine("There is no door to " + direction + "!");
 			}
 			else
 			{
+				if (nextRoom.Locked)
+                {
+					Console.WriteLine("This entrance is locked, you need something to open it");
+					return;
+                }
 				player.currentRoom = nextRoom;
 				Console.WriteLine(player.currentRoom.GetLongDescription());
 				player.Damage(1);

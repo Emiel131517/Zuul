@@ -9,6 +9,12 @@ namespace Zuul
 		{ 
 			get { return chest; } 
 		}
+		private bool locked;
+		public bool Locked
+		{
+			get { return locked; }
+		}
+
 		private string description;
 		private Dictionary<string, Room> exits; // stores exits of this room.
 
@@ -23,6 +29,21 @@ namespace Zuul
 			exits = new Dictionary<string, Room>();
 			chest = new Inventory(100);
 		}
+
+		public bool IsLocked()
+        {
+			if (locked)
+            {
+				locked = false;
+				return locked;
+            }
+			if (locked == false)
+            {
+				locked = true;
+				return locked;
+            }
+			return false;
+        }
 
 		/**
 		 * Define an exit from this room.
@@ -52,6 +73,7 @@ namespace Zuul
 			str += description;
 			str += ".\n";
 			str += GetExitString();
+			str += ".\n";
 			return str;
 		}
 
