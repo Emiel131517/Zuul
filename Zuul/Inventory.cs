@@ -19,10 +19,10 @@ namespace Zuul
         {
             foreach (KeyValuePair<string, Item> entry in items)
             {
-
+                return "These are the items in the room: " + entry.Key;
             }
             
-            return "These are all the items in the room: ";
+            return "There are no items in the room";
         }
 
         public int CurrentWeight()

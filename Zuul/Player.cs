@@ -101,7 +101,7 @@ namespace Zuul
                 string exitString = command.GetThirdWord();
                 Room next = currentRoom.GetExit(exitString);
                 next.Locked = false;
-                Console.WriteLine("You opend a door");
+                Console.WriteLine("You rammed open the door");
                 this.inventory.Get("hammer");
             }
             return "";

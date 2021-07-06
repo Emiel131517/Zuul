@@ -26,7 +26,7 @@ namespace Zuul
 			Room medicbay = new Room("In a medical bay");
 			Room office = new Room("in the computing admin office");
 			Room basement = new Room("In a foggy and smelly basement");
-			Room cave = new Room("A dark cave unknown cave");
+			Room cave = new Room("In a dark unknown cave");
 			Room freedom = new Room("You made it to freedom and you are far away from the university");
 
 			// initialise room exits
@@ -61,7 +61,7 @@ namespace Zuul
 			player.currentRoom = outside;  // start game outside
 
 			// Items
-			outside.Chest.Put("hammer", new Item(15, "A heavy hammer"));
+			janitorsroom.Chest.Put("hammer", new Item(15, "A heavy hammer"));
 			medicbay.Chest.Put("medkit", new Item(5, "A medical health kit"));
 		}
 
