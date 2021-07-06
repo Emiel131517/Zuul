@@ -13,6 +13,13 @@ namespace Zuul
 		public bool Locked
 		{
 			get { return locked; }
+			set { locked = value; }
+		}
+		private bool finalDestination = false;
+		public bool FinalDestination
+		{ 
+			get { return finalDestination; } 
+			set { finalDestination = value; }
 		}
 
 		private string description;
@@ -30,19 +37,23 @@ namespace Zuul
 			chest = new Inventory(100);
 		}
 
-		public bool IsLocked()
+		public bool UnlockDoor()
         {
 			if (locked)
             {
 				locked = false;
 				return locked;
             }
+			return true;
+        }
+
+		public bool LockDoor()
+        {
 			if (locked == false)
             {
 				locked = true;
-				return locked;
             }
-			return false;
+			return true;
         }
 
 		/**
@@ -74,6 +85,7 @@ namespace Zuul
 			str += ".\n";
 			str += GetExitString();
 			str += ".\n";
+			str += chest.ShowItems();
 			return str;
 		}
 

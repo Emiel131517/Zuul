@@ -6,6 +6,7 @@ namespace Zuul
 	{
 		private Parser parser;
 		private Player player;
+		private bool test = false;
 
 		public Game ()
 		{
@@ -20,12 +21,13 @@ namespace Zuul
 			Room outside = new Room("outside the main entrance of the university");
 			Room theatre = new Room("in a lecture theatre");
 			Room pub = new Room("in the campus pub");
+			Room janitorsroom = new Room("in a janitors room");
 			Room lab = new Room("in a computing lab");
 			Room medicbay = new Room("In a medical bay");
 			Room office = new Room("in the computing admin office");
 			Room basement = new Room("In a foggy and smelly basement");
 			Room cave = new Room("A dark cave unknown cave");
-			Room freedom = new Room("You made it to freedan and you are far away from the university");
+			Room freedom = new Room("You made it to freedom and you are far away from the university");
 
 			// initialise room exits
 			outside.AddExit("east", theatre);
@@ -39,6 +41,9 @@ namespace Zuul
 			theatre.AddExit("west", outside);
 
 			pub.AddExit("east", outside);
+			pub.AddExit("west", janitorsroom);
+
+			janitorsroom.AddExit("east", pub);
 
 			lab.AddExit("north", outside);
 			lab.AddExit("east", office);
@@ -49,12 +54,14 @@ namespace Zuul
 			office.AddExit("west", lab);
 
 			cave.AddExit("north", freedom);
-			cave.IsLocked();
+			cave.LockDoor();
+
+			freedom.FinalDestination = true;
 
 			player.currentRoom = outside;  // start game outside
 
 			// Items
-			outside.Chest.Put("hammer", new Item(10, "A heavy hammer"));
+			outside.Chest.Put("hammer", new Item(15, "A heavy hammer"));
 			medicbay.Chest.Put("medkit", new Item(5, "A medical health kit"));
 		}
 
@@ -66,8 +73,12 @@ namespace Zuul
 			PrintWelcome();
 
 			// Enter the main command loop.  Here we repeatedly read commands and
-			// execute them until the player wants to quit.
+			// execute them until the player wants to quit
 			bool finished = false;
+			if (test == true)
+			{
+				finished = true;
+			}
 			if (player.Health < 1)
 			{
 				finished = true;
@@ -78,6 +89,11 @@ namespace Zuul
 				{
 					Command command = parser.GetCommand();
 					finished = ProcessCommand(command);
+					if (player.currentRoom.FinalDestination)
+                    {
+						finished = true;
+						Console.WriteLine(" you finished");
+                    }
 				}
 				else
                 {

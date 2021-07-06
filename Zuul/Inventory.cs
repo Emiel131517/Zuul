@@ -15,6 +15,16 @@ namespace Zuul
             this.items = new Dictionary<string, Item>();
         }
 
+        public string ShowItems()
+        {
+            foreach (KeyValuePair<string, Item> entry in items)
+            {
+
+            }
+            
+            return "These are all the items in the room: ";
+        }
+
         public int CurrentWeight()
         {
             int totalWeight = 0;
