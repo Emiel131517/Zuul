@@ -85,7 +85,7 @@ namespace Zuul
 			str += ".\n";
 			str += GetExitString();
 			str += ".\n";
-			str += chest.ShowItems();
+			str += chest.ShowRoomItems();
 			return str;
 		}
 

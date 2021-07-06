@@ -32,7 +32,9 @@ namespace Zuul
             Console.WriteLine("[status] This is your status update:");
             Console.WriteLine("You are loosing blood! You have " + Health + " health left");
             Console.WriteLine("Your weight is: " + inventory.CurrentWeight());
+            Console.WriteLine(inventory.ShowinventoryItems());
         }
+
         public int Damage(int amount)
         {
             health = health - amount;

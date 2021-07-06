@@ -15,7 +15,7 @@ namespace Zuul
             this.items = new Dictionary<string, Item>();
         }
 
-        public string ShowItems()
+        public string ShowRoomItems()
         {
             foreach (KeyValuePair<string, Item> entry in items)
             {
@@ -23,6 +23,15 @@ namespace Zuul
             }
             
             return "There are no items in the room";
+        }
+        public string ShowinventoryItems()
+        {
+            foreach (KeyValuePair<string, Item> entry in items)
+            {
+                return "These are the items in your inventory: " + entry.Key;
+            }
+
+            return "There are no items in your inventory";
         }
 
         public int CurrentWeight()
