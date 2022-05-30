@@ -32,7 +32,9 @@ namespace Zuul
             Console.WriteLine("[status] This is your status update:");
             Console.WriteLine("You are loosing blood! You have " + Health + " health left");
             Console.WriteLine("Your weight is: " + inventory.CurrentWeight());
+            Console.WriteLine(inventory.ShowinventoryItems());
         }
+
         public int Damage(int amount)
         {
             health = health - amount;
@@ -71,6 +73,10 @@ namespace Zuul
             currentRoom.Chest.Put(itemName, item);
             return false;
         }
+        public string InspectItem()
+        {
+            return "this item does not exist";
+        }
         public bool DropToChest(string itemName)
         {
             Item item = inventory.Get(itemName);
@@ -89,13 +95,14 @@ namespace Zuul
             Item item = inventory.Get(itemName);
             if (item == null)
             {
-                return "You don't have " + itemName; 
+                Console.WriteLine("You don't have " + itemName);
+                return ""; 
             }
             if (itemName == "medkit")
             {
                 this.Heal(7);
                 Console.WriteLine("You used a medkit!");
-                this.inventory.Get("medkit");
+                return "";
             }
            if (itemName == "hammer")
             {
@@ -103,13 +110,13 @@ namespace Zuul
                 Room next = currentRoom.GetExit(exitString);
                 next.Locked = false;
                 Console.WriteLine("You rammed open the door");
-                this.inventory.Get("hammer");
+                return "";
             }
            if (itemName == "harmonica")
             {
                 this.Heal(3);
                 Console.WriteLine("You play a nice song and you healed a bit, but the harmonica broke");
-                this.inventory.Get("harmonica");
+                return "";
             }
            if (itemName == "beer")
             {
@@ -118,13 +125,13 @@ namespace Zuul
                 {
                     this.Heal(5);
                     Console.WriteLine("You feel much better now and you healed alot");
-                    this.inventory.Get("beer");
+                    return "";
                 }
                 if (beerchance == 1)
                 {
                     this.Damage(2);
                     Console.WriteLine("You got drunk and hit your toe, you lost some health");
-                    this.inventory.Get("beer");
+                    return "";
                 }
             }
             return "";
